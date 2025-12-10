@@ -1,10 +1,11 @@
 import './App.css'
+import MainLayout from './components/layout/MainLayout'
 
 function App() {
   return (
-    <>
-      <div className='text-blue-500'>hello</div>
-    </>
+    <MainLayout>
+      {/* 페이지 내용은 Router 적용 후 추가 예정 */}
+    </MainLayout>
   )
 }
 
