@@ -1,12 +1,8 @@
-import './App.css'
-import MainLayout from './components/layout/MainLayout'
+import { RouterProvider } from 'react-router-dom'
+import { router } from './router'
 
 function App() {
-  return (
-    <MainLayout>
-      {/* 페이지 내용은 Router 적용 후 추가 예정 */}
-    </MainLayout>
-  )
+  return <RouterProvider router={router} />
 }
 
 export default App
