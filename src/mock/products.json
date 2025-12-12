@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "name": "Product 01",
+    "price": 10000,
+    "image": "/images/img1.jpg",
+    "description": "This is a placeholder description for product 01.",
+    "rating": 4.7
+  },
+  {
+    "id": 2,
+    "name": "Product 02",
+    "price": 15000,
+    "image": "/images/img2.jpg",
+    "description": "This is a placeholder description for product 02.",
+    "rating": 4.5
+  },
+  {
+    "id": 3,
+    "name": "Product 03",
+    "price": 20000,
+    "image": "/images/img3.jpg",
+    "description": "This is a placeholder description for product 03.",
+    "rating": 4.3
+  }
+]
