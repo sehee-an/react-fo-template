@@ -1,13 +1,45 @@
 import { useEffect, useState } from "react";
 import { fetchProducts } from "../utils/api";
 import { Product } from "../types/product";
+import Skeleton from "../components/ui/Skeleton";
 
 export default function Products() {
   const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
   useEffect(() => {
-    fetchProducts().then(setProducts).catch(console.error);
+    fetchProducts()
+      .then(setProducts)
+      .catch(() => setError("Failed to load products"))
+      .finally(() => setLoading(false));
   }, []);
+
+  // Loading Skeleton
+  if (loading) {
+    return (
+      <div>
+        <h2 className="text-2xl font-semibold mb-6">Products</h2>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+          {Array.from({ length: 6 }).map((_, idx) => (
+            <div key={idx} className="p-4 border rounded-lg bg-white shadow-sm">
+              <Skeleton className="w-full h-48 mb-4" />
+              <Skeleton className="h-5 w-3/4 mb-2" />
+              <Skeleton className="h-4 w-full mb-2" />
+              <Skeleton className="h-4 w-1/2" />
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  }
+
+  // Error handling
+  if (error) {
+    return <div className="text-red-600">{error}</div>;
+  }
+
 
   return (
     <div>
