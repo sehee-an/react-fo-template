@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { fetchProducts } from "../utils/api";
 import { Product } from "../types/product";
 import Skeleton from "../components/ui/Skeleton";
+import { Link } from "react-router-dom";
 
 export default function Products() {
   const [products, setProducts] = useState<Product[]>([]);
@@ -47,8 +48,9 @@ export default function Products() {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         {products.map((p) => (
-          <div
+          <Link
             key={p.id}
+            to={`/product/${p.id}`}
             className="p-4 border rounded-lg bg-white shadow-sm hover:shadow-md transition"
           >
             <img
@@ -61,7 +63,7 @@ export default function Products() {
             <p className="text-blue-600 font-semibold mt-2">
               {p.price.toLocaleString()}원
             </p>
-          </div>
+          </Link>
         ))}
       </div>
     </div>
