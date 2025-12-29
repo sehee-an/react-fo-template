@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { fetchProducts } from "../utils/api";
 import { Product } from "../types/product";
 import Skeleton from "../components/ui/Skeleton";
 import Button from "../components/ui/Button";
+import Breadcrumb from "~/components/common/Breadcrumb";
+import { formatPrice } from "~/utils/format";
 
 export default function ProductDetail() {
   const { id } = useParams();
@@ -12,6 +14,8 @@ export default function ProductDetail() {
   const [product, setProduct] = useState<Product | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchProducts()
@@ -50,6 +54,19 @@ export default function ProductDetail() {
 
   return (
     <div className="max-w-3xl mx-auto">
+
+      <Breadcrumb
+        items={[
+          { label: "Home", to: "/" },
+          { label: "Products", to: "/products" },
+          { label: product.name }
+        ]}
+      />
+
+      <Button onClick={() => navigate(-1)} className="mb-6">
+        ← Back
+      </Button>
+      
       <img
         src={product.image}
         alt={product.name}
@@ -61,7 +78,7 @@ export default function ProductDetail() {
       <p className="text-gray-700 mb-4">{product.description}</p>
 
       <p className="text-blue-600 text-xl font-bold mb-6">
-        {product.price.toLocaleString()}원
+        {formatPrice(product.price)}
       </p>
 
       <Button>Buy Now</Button>
