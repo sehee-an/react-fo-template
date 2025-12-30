@@ -8,6 +8,8 @@ export default function Products() {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [search, setSearch] = useState("");
+  const [sort, setSort] = useState("");
 
   useEffect(() => {
     fetchProducts()
@@ -41,13 +43,41 @@ export default function Products() {
     return <div className="text-red-600">{error}</div>;
   }
 
+  const filteredProducts = products
+  .filter((item) =>
+    item.name.toLowerCase().includes(search.toLowerCase())
+  )
+  .sort((a, b) => {
+    if (sort === "low") return a.price - b.price;
+    if (sort === "high") return b.price - a.price;
+    return 0;
+  });
 
   return (
     <div>
       <h2 className="text-2xl font-semibold mb-6">Products</h2>
 
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6 gap-4">
+        <input 
+          type="text"
+          placeholder="Search product..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          className="border px-3 py-2 rounded w-full sm:w-64"
+        />
+        <select 
+        value={sort}
+        onChange={(e) => setSort(e.target.value)}
+        className="border px-3 py-2 rounded w-full sm:w-40"
+      >
+        <option value="">Sort</option>
+        <option value="low">Price: Low → High</option>
+        <option value="high">Price: High → Low</option>
+      </select>
+      </div>
+      
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-        {products.map((p) => (
+        {filteredProducts.map((p) => (
           <Link
             key={p.id}
             to={`/product/${p.id}`}
