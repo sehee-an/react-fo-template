@@ -10,6 +10,9 @@ export default function Products() {
   const [error, setError] = useState("");
   const [search, setSearch] = useState("");
   const [sort, setSort] = useState("");
+  const [page, setPage] = useState(1);
+
+  const itemsPerPage = 6;
 
   useEffect(() => {
     fetchProducts()
@@ -17,6 +20,10 @@ export default function Products() {
       .catch(() => setError("Failed to load products"))
       .finally(() => setLoading(false));
   }, []);
+
+  useEffect(() => {
+    setPage(1);
+  }, [search, sort]);
 
   // Loading Skeleton
   if (loading) {
@@ -53,6 +60,11 @@ export default function Products() {
     return 0;
   });
 
+  const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
+  const startIndex = (page - 1) * itemsPerPage;
+  const currentProducts = filteredProducts.slice(startIndex, startIndex + itemsPerPage);
+  
+
   return (
     <div>
       <h2 className="text-2xl font-semibold mb-6">Products</h2>
@@ -66,18 +78,18 @@ export default function Products() {
           className="border px-3 py-2 rounded w-full sm:w-64"
         />
         <select 
-        value={sort}
-        onChange={(e) => setSort(e.target.value)}
-        className="border px-3 py-2 rounded w-full sm:w-40"
-      >
-        <option value="">Sort</option>
-        <option value="low">Price: Low → High</option>
-        <option value="high">Price: High → Low</option>
-      </select>
+          value={sort}
+          onChange={(e) => setSort(e.target.value)}
+          className="border px-3 py-2 rounded w-full sm:w-40"
+        >
+          <option value="">Sort</option>
+          <option value="low">Price: Low → High</option>
+          <option value="high">Price: High → Low</option>
+        </select>
       </div>
       
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-        {filteredProducts.map((p) => (
+        {currentProducts.map((p) => (
           <Link
             key={p.id}
             to={`/product/${p.id}`}
@@ -95,6 +107,37 @@ export default function Products() {
             </p>
           </Link>
         ))}
+      </div>
+
+      <div className="flex justify-center mt-8 gap-2">
+        <button
+          disabled={page === 1}
+          onClick={() => setPage(page - 1)}
+          className="px-3 py-2 border rounded disabled:opacity-40"
+        >
+          Prev
+        </button>
+
+        {Array.from({ length: totalPages }).map((_, idx) => {
+          const pageNum = idx + 1;
+          return (
+            <button
+              key={pageNum}
+              onClick={() => setPage(pageNum)}
+              className={`px-4 py-2 rounded border ${pageNum === page ? "bg-blue-600 text-white" : "bg-white"}`}
+            >
+              {pageNum}
+            </button>
+          )
+        })}
+
+        <button
+          disabled={page === totalPages}
+          onClick={() => setPage(page + 1)}
+          className="px-3 py-2 border rounded disabled:opacity-40"
+        >
+          Next
+        </button>
       </div>
     </div>
   );

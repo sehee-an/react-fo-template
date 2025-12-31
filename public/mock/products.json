@@ -4,23 +4,69 @@
     "name": "Product 01",
     "price": 10000,
     "image": "/images/img1.jpg",
-    "description": "This is a placeholder description for product 01.",
-    "rating": 4.7
+    "description": "This is a sample description for Product 01."
   },
   {
     "id": 2,
     "name": "Product 02",
     "price": 15000,
     "image": "/images/img2.jpg",
-    "description": "This is a placeholder description for product 02.",
-    "rating": 4.5
+    "description": "This is a sample description for Product 02."
   },
   {
     "id": 3,
     "name": "Product 03",
     "price": 20000,
     "image": "/images/img3.jpg",
-    "description": "This is a placeholder description for product 03.",
-    "rating": 4.3
+    "description": "This is a sample description for Product 03."
+  },
+  {
+    "id": 4,
+    "name": "Product 04",
+    "price": 14900,
+    "image": "/images/img1.jpg",
+    "description": "This is a sample description for Product 04."
+  },
+  {
+    "id": 5,
+    "name": "Product 05",
+    "price": 32900,
+    "image": "/images/img2.jpg",
+    "description": "This is a sample description for Product 05."
+  },
+  {
+    "id": 6,
+    "name": "Product 06",
+    "price": 9900,
+    "image": "/images/img3.jpg",
+    "description": "This is a sample description for Product 06."
+  },
+  {
+    "id": 7,
+    "name": "Product 07",
+    "price": 22900,
+    "image": "/images/img1.jpg",
+    "description": "This is a sample description for Product 07."
+  },
+  {
+    "id": 8,
+    "name": "Product 08",
+    "price": 18900,
+    "image": "/images/img2.jpg",
+    "description": "This is a sample description for Product 08."
+  },
+  {
+    "id": 9,
+    "name": "Product 09",
+    "price": 39900,
+    "image": "/images/img3.jpg",
+    "description": "This is a sample description for Product 09."
+  },
+  {
+    "id": 10,
+    "name": "Product 10",
+    "price": 15900,
+    "image": "/images/img1.jpg",
+    "description": "This is a sample description for Product 10."
   }
 ]
